@@ -1,0 +1,817 @@
+index.html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajude o Gabriel a se Formar - Campanha Solidária</title>
+    
+    <!-- FONTE: Montserrat (Premium/Moderno) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- FACEBOOK PIXEL -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        // fbq('init', 'SEU_ID_DO_PIXEL_AQUI'); 
+        // fbq('track', 'PageView');
+    </script>
+    
+    <style>
+        :root {
+            --primary-green: #00b140; /* Verde Premium */
+            --dark-green: #008a32;
+            --bg-gray: #f7f9fa;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --border-color: #e5e5e5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 90px;
+        }
+
+        /* --- Header --- */
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            letter-spacing: -0.5px;
+        }
+        .logo span { color: #FFA500; }
+
+        .btn-header {
+            border: 1px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .btn-header:hover { background-color: var(--primary-green); color: white; }
+
+        /* --- Layout --- */
+        .campaign-wrapper {
+            max-width: 1140px;
+            margin: 30px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .left-col { display: flex; flex-direction: column; gap: 20px; }
+
+        .campaign-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            color: #222;
+        }
+
+        /* --- Video/Image Wrapper --- */
+        .main-media-container {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: #000;
+            position: relative;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background-color: #000;
+            cursor: pointer;
+        }
+        .video-wrapper img.video-cover {
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+            transition: opacity 0.3s;
+        }
+        .play-icon-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 70px;
+            color: white;
+            opacity: 0.9;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            pointer-events: none;
+            transition: transform 0.2s;
+        }
+        .video-wrapper:hover .play-icon-overlay {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .video-playing .video-cover,
+        .video-playing .play-icon-overlay {
+            display: none;
+        }
+
+        /* --- Conteúdo --- */
+        .story-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            scroll-margin-top: 100px;
+        }
+        .story-card h3 { 
+            margin-bottom: 15px; color: var(--text-dark); font-size: 20px; 
+            border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; display: inline-block;
+        }
+        .story-card p { margin-bottom: 15px; color: #555; font-size: 16px; font-weight: 400; }
+
+        .highlight-box {
+            background-color: #f0fdf4;
+            border-left: 4px solid var(--primary-green);
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #166534;
+            font-weight: 500;
+        }
+
+        /* --- Grid de Doação --- */
+        .donation-grid-section {
+            margin-top: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            background: #f8fcf9;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .donation-title {
+            font-size: 18px; font-weight: 700; color: #333; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .donation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .btn-value {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.1s, background-color 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .btn-value:hover { background-color: #27ae60; transform: translateY(-2px); }
+        .btn-value.selected { background-color: #1e8449; border: 2px solid #fff; box-shadow: 0 0 0 3px #1e8449; }
+        .btn-value-large { grid-column: span 2; background-color: #2ecc71; }
+
+        .custom-donation-input {
+            width: 100%;
+            margin-top: 15px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .custom-donation-input:focus {
+            border-color: var(--primary-green);
+            outline: none;
+        }
+
+        /* --- Pix Area --- */
+        .pix-area {
+            background: #f0fdf4; border: 2px dashed var(--primary-green);
+            padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px;
+        }
+        .pix-key { font-family: monospace; font-size: 16px; color: #333; margin: 15px 0; word-break: break-all; font-weight: bold; background: white; padding: 10px; border-radius: 4px; border: 1px solid #ddd;}
+        .btn-copy-pix {
+            background: var(--primary-green); border: none; color: white;
+            padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: 700;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+        .btn-copy-pix:hover { background: var(--dark-green); }
+
+        /* --- Tabs --- */
+        .tabs {
+            display: flex;
+            gap: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 0;
+            font-weight: 600;
+            color: var(--text-gray);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .tab.active {
+            color: var(--primary-green);
+            border-bottom: 3px solid var(--primary-green);
+        }
+        .badge-count {
+            background: #eee; padding: 2px 6px; border-radius: 10px; font-size: 11px; color: #666; margin-left: 5px;
+        }
+
+        /* --- Comentários --- */
+        .comments-section {
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+            scroll-margin-top: 100px;
+        }
+        .vakinha-header {
+            display: flex; align-items: center; gap: 15px; margin-bottom: 30px;
+            background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #eee;
+        }
+        .heart-icon-large { font-size: 40px; color: #ff4081; } 
+        
+        .comment-item {
+            display: flex; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid #f9f9f9; padding-bottom: 15px;
+        }
+        .comment-avatar img {
+            width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .comment-body { flex: 1; }
+        .comment-name { font-weight: 700; font-size: 15px; color: #0056b3; margin-bottom: 4px; }
+        .comment-text { font-size: 15px; color: #444; margin-bottom: 8px; line-height: 1.5; }
+        .comment-meta { font-size: 12px; color: #999; display: flex; gap: 15px; cursor: pointer; }
+        .comment-meta span:hover { text-decoration: underline; color: var(--primary-green); }
+
+        /* --- Sidebar Right --- */
+        .right-col { position: relative; }
+        .sticky-card {
+            background: white; padding: 25px; border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 1px solid var(--border-color);
+            position: sticky; top: 100px;
+        }
+        .meta-values { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
+        .raised { font-size: 24px; font-weight: 700; color: var(--primary-green); }
+        .goal { font-size: 12px; color: var(--text-gray); }
+        .progress-container { width: 100%; background: #e9ecef; border-radius: 10px; height: 10px; margin-bottom: 20px; overflow: hidden; }
+        .progress-bar { height: 100%; background: var(--primary-green); width: 0%; border-radius: 10px; transition: width 1s; }
+        
+        .btn-donate-sidebar {
+            display: block; width: 100%; background-color: var(--primary-green); color: white;
+            padding: 18px; border-radius: 50px; font-size: 18px; font-weight: 700; text-transform: uppercase;
+            border: none; cursor: pointer; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,177,64,0.3);
+            font-family: 'Montserrat', sans-serif;
+        }
+        .btn-donate-sidebar:hover { transform: scale(1.02); }
+
+        /* --- Mobile Sticky Footer --- */
+        .mobile-cta-bar {
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%;
+            background: white; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); z-index: 9999;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .mobile-content { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; }
+        .btn-sticky { background: var(--primary-green); color: white; border: none; padding: 10px 25px; border-radius: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+
+        /* --- Toast & Popups --- */
+        .donation-popup {
+            position: fixed; top: 15px; left: 50%; transform: translateX(-50%) translateY(-150%);
+            background: #333; color: white; padding: 12px 20px; border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 10px;
+            z-index: 999999; width: max-content; max-width: 90%;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-size: 14px;
+        }
+        .popup-show { transform: translateX(-50%) translateY(0); }
+        .popup-icon { color: #2ecc71; font-size: 16px; }
+
+        .toast {
+            visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+            border-radius: 4px; padding: 16px; position: fixed; z-index: 10000; left: 50%; bottom: 80px; transform: translateX(-50%);
+        }
+        .toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 80px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 80px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
+        @media (max-width: 768px) {
+            .campaign-wrapper { grid-template-columns: 1fr; display: flex; flex-direction: column; }
+            .right-col { order: 2; }
+            .left-col { order: 1; }
+            .mobile-cta-bar { display: block; }
+            .sticky-card { display: none; } 
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-hand-holding-heart"></i>
+                Juntos<span>PeloGabriel</span>
+            </div>
+            <a href="#" class="btn-header">Entrar</a>
+        </div>
+    </header>
+
+    <div class="campaign-wrapper">
+        
+        <div class="left-col">
+            <h1 class="campaign-title">O sonho do meu pai não pode parar: Me ajude a concluir Odontologia</h1>
+            
+            <div class="main-media-container">
+                <!-- Wrapper que lida com o clique para carregar o vídeo -->
+                <div class="video-wrapper" id="video-container" onclick="playVideo()">
+                    <!-- FOTO DE CAPA INTELIGENTE -->
+                    <!-- Tenta carregar image_b1c194.jpg (sua foto), se não achar, usa a capa oficial do Youtube -->
+                    <img src="image_b1c194.jpg" alt="Capa do Vídeo" class="video-cover" onerror="this.src='https://img.youtube.com/vi/fbqZFvFtYLg/maxresdefault.jpg'">
+                    
+                    <!-- Ícone de Play -->
+                    <div class="play-icon-overlay">
+                        <i class="fas fa-play" style="margin-left: 5px;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NAVEGAÇÃO -->
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab(this, 'story-card')">Sobre</div>
+                <div class="tab" onclick="switchTab(this, 'comments-section')">Mensagens <span class="badge-count">783</span></div>
+            </div>
+
+            <div id="story-card" class="story-card">
+                <h3>Minha História</h3>
+                
+                <p><strong>Olá, meu nome é Gabriel.</strong></p>
+                <p>Sou de Matipó-MG, tenho 25 anos e sou estudante do 7º período de Odontologia. Se você me conhece, provavelmente já me viu com uma caixa de isopor vendendo meus <strong>geladinhos gourmet</strong> pela cidade.</p>
+                
+                <div class="highlight-box">
+                    "O sonho da vida do meu pai era me ver formado. Infelizmente, ele partiu recentemente, mas a promessa que fiz a ele continua viva."
+                </div>
+
+                <h3>A Realidade</h3>
+                <p>Com o falecimento do meu pai e a necessidade de cuidar da família, minhas vendas de geladinho caíram e <strong>acumulei mensalidades em atraso</strong>. Agora, em janeiro, a faculdade exige a quitação total dessa dívida para liberar minha rematrícula para o 7º período.</p>
+
+                <h3>Para onde vai sua doação?</h3>
+                <p>A meta de R$ 75.000,00 foi calculada na ponta do lápis para limpar meu nome, comprar os materiais e pagar TODO o restante do curso à vista com desconto. Veja a composição:</p>
+                
+                <ul style="list-style: none; margin: 0; padding: 0;">
+                    <li style="background: #FEF2F2; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #EF4444; display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-file-invoice-dollar" style="color:#B91C1C; font-size: 20px; margin-top: 3px;"></i>
+                        <div>
+                            <strong>Dívida Acumulada (URGENTE):</strong> <span style="color:#B91C1C; font-weight:bold;">R$ 16.800,00</span>
+                            <div style="font-size: 13px; color: #555;">Mensalidades atrasadas (1 período completo) que <strong>bloqueiam a rematrícula</strong> imediata.</div>
+                        </div>
+                    </li>
+                    <li style="background: #e6f7e9; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--primary-green); display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-tools" style="color:var(--dark-green); font-size: 20px; margin-top: 3px;"></i>
+                        <div>
+                            <strong>Lista de Materiais (7º Período):</strong> <span style="color:#c53030; font-weight:bold;">R$ 9.000,00</span>
+                            <div style="font-size: 13px; color: #555;">Instrumentais obrigatórios para atender os pacientes na clínica da faculdade.</div>
+                        </div>
+                    </li>
+                    <li style="background: #e6f7e9; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--primary-green); display: flex; align-items: flex-start; gap: 12px;">
+                        <i class="fas fa-graduation-cap" style="color:var(--dark-green); font-size: 20px; margin-top: 3px;"></i>
+                        <div>
+                            <strong>Quitação Total (7º ao 10º):</strong> <span style="color:#c53030; font-weight:bold;">R$ 49.200,00</span>
+                            <div style="font-size: 13px; color: #555;">Este valor permite pagar os 4 períodos restantes à vista, negociando um <strong>desconto de aprox. 25%</strong> sobre o valor total das mensalidades futuras.</div>
+                        </div>
+                    </li>
+                </ul>
+                <p style="margin-top:15px; font-size: 14px; font-style: italic;">*Qualquer valor arrecadado acima da meta será doado para instituições de caridade de Matipó.</p>
+                
+                <div class="donation-grid-section">
+                    <h4 class="donation-title">QUAL VALOR VOCÊ DESEJA DOAR?</h4>
+                    <div class="donation-grid">
+                        <button class="btn-value" onclick="selectValue(30, this)">R$ 30</button>
+                        <button class="btn-value" onclick="selectValue(40, this)">R$ 40</button>
+                        <button class="btn-value" onclick="selectValue(50, this)">R$ 50</button>
+                        <button class="btn-value" onclick="selectValue(70, this)">R$ 70</button>
+                        <button class="btn-value" onclick="selectValue(100, this)">R$ 100</button>
+                        <button class="btn-value" onclick="selectValue(150, this)">R$ 150</button>
+                        <button class="btn-value" onclick="selectValue(200, this)">R$ 200</button>
+                        <button class="btn-value" onclick="selectValue(300, this)">R$ 300</button>
+                        <button class="btn-value" onclick="selectValue(500, this)">R$ 500</button>
+                        <button class="btn-value" onclick="selectValue(750, this)">R$ 750</button>
+                        <button class="btn-value btn-value-large" onclick="selectValue(1000, this)">R$ 1.000</button>
+                    </div>
+                    
+                    <!-- CAMPO OUTRO VALOR -->
+                    <input type="number" class="custom-donation-input" placeholder="Ou digite outro valor (R$)" oninput="customValue(this)">
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3>Doe via Pix</h3>
+                    <div class="pix-area" id="areaPix">
+                        <p style="margin-bottom: 5px;">Chave Pix (E-mail):</p>
+                        <div class="pix-key" id="textoPix">ajudeogabriel2026@gmail.com</div>
+                        <button class="btn-copy-pix" onclick="copiarPix()">
+                            <i class="far fa-copy"></i> COPIAR CHAVE PIX
+                        </button>
+                        <div id="valor-escolhido-msg" style="margin-top: 10px; font-weight: bold; color: var(--primary-green); display:none;">
+                            Valor selecionado: R$ <span id="valor-display">00,00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="comments-section" class="comments-section">
+                <div class="vakinha-header">
+                    <i class="fas fa-heart heart-icon-large"></i>
+                    <div class="vakinha-stats">
+                        <h4>783 corações recebidos</h4>
+                        <p>Vakinha do Amor • Ativo desde 21/10</p>
+                    </div>
+                </div>
+                
+                <h5 style="margin-bottom: 20px; color: #666;">Mostrando comentários recentes</h5>
+
+                <!-- João Almeida -->
+                <div class="comment-item">
+                    <div class="comment-avatar"><img src="https://randomuser.me/api/portraits/men/46.jpg" alt="João"></div>
+                    <div class="comment-body">
+                        <div class="comment-name">João Carlos Almeida</div>
+                        <div class="comment-text">Fiz uma doação agora, Gabriel. Te vejo sempre aqui em Matipó na luta com os geladinhos. Muita força, o diploma já é seu! 🙏</div>
+                        <div class="comment-meta">
+                            <span>Responder</span> <span>Curtir</span> <span>15 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Letícia Soares -->
+                <div class="comment-item">
+                    <div class="comment-avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Letícia"></div>
+                    <div class="comment-body">
+                        <div class="comment-name">Letícia Soares</div>
+                        <div class="comment-text">Contribuí com R$200,00. Sou dentista e sei o quanto os materiais são caros no 7º período. Não desiste!</div>
+                        <div class="comment-meta">
+                            <span>Responder</span> <span>Curtir</span> <span>42 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aparecida -->
+                <div class="comment-item">
+                    <div class="comment-avatar"><img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Aparecida"></div>
+                    <div class="comment-body">
+                        <div class="comment-name">Aparecida Souza</div>
+                        <div class="comment-text">Sou vizinha da família há 30 anos. Conheci o pai do Gabriel, um homem de ouro. Ajudo com um pouco da minha aposentadoria de coração.</div>
+                        <div class="comment-meta">
+                            <span>Responder</span> <span>Curtir</span> <span>2 horas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Osvaldo -->
+                <div class="comment-item">
+                    <div class="comment-avatar"><img src="https://randomuser.me/api/portraits/men/91.jpg" alt="Osvaldo"></div>
+                    <div class="comment-body">
+                        <div class="comment-name">Osvaldo Pereira</div>
+                        <div class="comment-text">Na minha época não tive essa chance de estudar. Ver um jovem batalhador assim me enche de esperança. Deus abençoe, meu filho.</div>
+                        <div class="comment-meta">
+                            <span>Responder</span> <span>Curtir</span> <span>3 horas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment-item">
+                    <div class="comment-avatar"><img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Amanda"></div>
+                    <div class="comment-body">
+                        <div class="comment-name">Amanda Ferreira</div>
+                        <div class="comment-text">O mundo precisa de dentistas dedicados assim. Deus te abençoe nessa reta final.</div>
+                        <div class="comment-meta">
+                            <span>Responder</span> <span>Curtir</span> <span>5 horas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment-item">
+                    <div class="comment-avatar"><img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Lucas"></div>
+                    <div class="comment-body">
+                        <div class="comment-name">Lucas Pereira</div>
+                        <div class="comment-text">Pouco a pouco a gente chega lá. Enviei minha contribuição via Pix agora.</div>
+                        <div class="comment-meta">
+                            <span>Responder</span> <span>Curtir</span> <span>8 horas</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Jéssica Santos -->
+                <div class="comment-item">
+                    <div class="comment-avatar"><img src="https://randomuser.me/api/portraits/women/26.jpg" alt="Jéssica"></div>
+                    <div class="comment-body">
+                        <div class="comment-name">Jéssica Santos</div>
+                        <div class="comment-text">Vou incluir você nas minhas orações. Contribuí com R$150,00 de coração. Seu pai está orgulhoso! ❤️</div>
+                        <div class="comment-meta">
+                            <span>Responder</span> <span>Curtir</span> <span>12 horas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rafael Mendes -->
+                <div class="comment-item">
+                    <div class="comment-avatar"><img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Rafael"></div>
+                    <div class="comment-body">
+                        <div class="comment-name">Rafael Mendes</div>
+                        <div class="comment-text">Conheço a índole do Gabriel. Merece demais esse diploma. Conte comigo, irmão! 👊</div>
+                        <div class="comment-meta">
+                            <span>Responder</span> <span>Curtir</span> <span>1 dia</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="btn-load-more" onclick="carregarMaisComentarios()" style="width:100%; padding:12px; border:1px solid #ddd; background:#f9f9f9; color:#555; cursor:pointer; font-weight:600; border-radius:4px;">Carregar mais comentários</button>
+            </div>
+        </div>
+
+        <div class="right-col">
+            <div class="sticky-card">
+                <div class="meta-values">
+                    <span class="raised" id="raisedVal">R$ 10.530,94</span>
+                    <span class="goal" id="goalVal">da meta de R$ 75.000,00</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                
+                <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-size:14px; color:#666;">
+                    <span><strong>134</strong> apoiadores</span>
+                    <span><strong>16</strong> dias restantes</span>
+                </div>
+
+                <div style="background-color: #FEF2F2; color: #B91C1C; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 700; text-align: center; margin-bottom: 20px; border: 1px solid #FECACA;">
+                    <i class="fas fa-exclamation-circle"></i> Prazo para quitar dívida e renovar matrícula: 16 dias
+                </div>
+                
+                <button class="btn-donate-sidebar" onclick="focarPix()">QUERO AJUDAR</button>
+                <div style="text-align: center; margin-top: 10px;">
+                    <img src="https://img.shields.io/badge/Site-Seguro-green?style=flat-square&logo=whatsapp" alt="Seguro">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mobile-cta-bar">
+        <div style="height:4px; background:#eee; width:100%"><div class="progress-bar" id="mobileProgress"></div></div>
+        <div class="mobile-content">
+            <div>
+                <div style="font-weight:700; color:var(--primary-green);">R$ 10.530,94</div>
+                <div style="font-size:10px; color:#666;">arrecadados</div>
+            </div>
+            <button onclick="focarPix()" class="btn-sticky">DOAR AGORA</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // --- FUNÇÃO PLAY VIDEO (CLICK TO LOAD) ---
+        function playVideo() {
+            const container = document.getElementById('video-container');
+            if (container.classList.contains('video-playing')) return;
+            
+            container.classList.add('video-playing');
+            
+            // ID do vídeo YouTube: fbqZFvFtYLg (Vídeo atualizado)
+            const videoId = 'fbqZFvFtYLg';
+            
+            const iframe = document.createElement('iframe');
+            iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`);
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allowfullscreen', 'true');
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            
+            // Garante que o iframe ocupe todo o espaço
+            iframe.style.position = "absolute";
+            iframe.style.top = "0";
+            iframe.style.left = "0";
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            
+            container.appendChild(iframe);
+        }
+
+        let valorSelecionado = 200; 
+
+        // --- NAVEGAÇÃO SUAVE ---
+        function switchTab(el, targetId) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            const target = document.getElementById(targetId);
+            if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // --- GRID FUNCTION ---
+        function selectValue(valor, el) { 
+            valorSelecionado = valor;
+            document.querySelectorAll('.btn-value').forEach(btn => btn.classList.remove('selected'));
+            if(el) el.classList.add('selected');
+            
+            const input = document.querySelector('.custom-donation-input');
+            if(input) input.value = '';
+
+            focarPix();
+            updateDisplayValue(valor);
+            showToast(`Você escolheu R$ ${valor},00. Copie a chave Pix.`);
+        }
+
+        // --- CUSTOM VALUE FUNCTION ---
+        function customValue(el) {
+            document.querySelectorAll('.btn-value').forEach(btn => btn.classList.remove('selected'));
+            let val = parseFloat(el.value);
+            if(isNaN(val) || val <= 0) {
+                document.getElementById('valor-escolhido-msg').style.display = "none";
+                valorSelecionado = 0;
+            } else {
+                valorSelecionado = val;
+                updateDisplayValue(val.toFixed(2).replace('.', ','));
+                document.getElementById('valor-escolhido-msg').style.display = "block";
+            }
+        }
+
+        function updateDisplayValue(val) {
+            const display = document.getElementById('valor-display');
+            if(display) display.innerText = val + (typeof val === 'number' ? ",00" : "");
+        }
+
+        // --- COPY PIX FUNCTION ---
+        function copiarPix() {
+            const pixText = document.getElementById('textoPix').innerText;
+            const el = document.createElement('textarea');
+            el.value = pixText;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            showToast("Chave Pix copiada! Abra seu app do banco.");
+
+            let pixelValue = valorSelecionado > 0 ? valorSelecionado : 30.00;
+
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Donate', {
+                    currency: 'BRL',
+                    value: pixelValue, 
+                    content_name: 'Campanha_Gabriel_Odonto'
+                });
+            }
+        }
+
+        // --- NOTIFICATIONS ---
+        const nomes = ["Ana Clara", "Luiz Fernando", "Ricardo Gomes", "Bruna Oliveira", "Lucas Pereira", "Amanda Martins"];
+        const valores = ["30,00", "50,00", "20,00", "100,00", "40,00"];
+
+        function mostrarNotificacao() {
+            const nome = nomes[Math.floor(Math.random() * nomes.length)];
+            const valor = valores[Math.floor(Math.random() * valores.length)];
+            
+            const div = document.createElement('div');
+            div.className = 'donation-popup';
+            div.innerHTML = `<i class="fas fa-heart popup-icon"></i> <div><strong>${nome}</strong> doou R$ ${valor}</div>`;
+            
+            document.body.appendChild(div);
+            void div.offsetWidth; 
+            div.classList.add('popup-show');
+
+            setTimeout(() => {
+                div.classList.remove('popup-show');
+                setTimeout(() => div.remove(), 500);
+            }, 4000);
+        }
+
+        setTimeout(() => {
+            mostrarNotificacao();
+            setInterval(mostrarNotificacao, 8000); 
+        }, 2000);
+
+        // --- PROGRESS BAR ---
+        window.onload = function() {
+            const arrecadado = 10530.94; 
+            const meta = 75000;
+            
+            let p = (arrecadado / meta) * 100;
+            if(p < 2) p = 2; 
+            
+            setTimeout(() => {
+                const bar = document.getElementById('progressBar');
+                const mobBar = document.getElementById('mobileProgress');
+                if(bar) bar.style.width = p + '%';
+                if(mobBar) mobBar.style.width = p + '%';
+            }, 500);
+        };
+
+        function focarPix() {
+            const el = document.getElementById('areaPix');
+            if(el) {
+                el.scrollIntoView({behavior: 'smooth', block: 'center'});
+                el.style.backgroundColor = "#dcfce7";
+                setTimeout(()=> el.style.backgroundColor = "#f0fdf4", 1000);
+            }
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById("toast");
+            t.innerText = msg;
+            t.className = "toast show";
+            setTimeout(() => t.className = t.className.replace("show", ""), 3000);
+        }
+
+        function carregarMaisComentarios() {
+            const btn = document.getElementById('btn-load-more');
+            btn.innerText = "Carregando...";
+            btn.disabled = true;
+            btn.style.opacity = "0.7";
+
+            setTimeout(() => {
+                const parent = document.getElementById('comments-section');
+                
+                const novosComentarios = [
+                    { name: "Jandira Rocha", text: "Tirei um pouquinho do meu orçamento para ajudar. Quero ver você formado, meu filho!", img: "women/72.jpg", time: "1 dia" },
+                    { name: "Paulo Roberto", text: "História emocionante. Que Deus abençoe seus estudos.", img: "men/64.jpg", time: "2 dias" },
+                    { name: "Sebastião Dias", text: "Sei o valor do trabalho duro. Parabéns pela garra!", img: "men/79.jpg", time: "2 dias" },
+                    { name: "Camila Dias", text: "Sou de Matipó também! Vamos ajudar gente!", img: "women/31.jpg", time: "3 dias" },
+                    { name: "Lourdes Costa", text: "Que exemplo lindo. Rezei por você hoje.", img: "women/67.jpg", time: "4 dias" },
+                    { name: "Juliana Martins", text: "R$ 50,00 de coração. Espero que ajude nos instrumentais.", img: "women/23.jpg", time: "5 dias" },
+                    { name: "Marcos Vinicius", text: "Doação feita. O diploma já é realidade!", img: "men/41.jpg", time: "6 dias" },
+                    { name: "Gustavo Rocha", text: "Bora bater essa meta, galera! Compartilhei no zap.", img: "men/28.jpg", time: "1 semana" },
+                    { name: "Beatriz Silva", text: "Futuro Dr. Gabriel! Já visualizo esse sorriso na formatura.", img: "women/52.jpg", time: "1 semana" }
+                ];
+
+                novosComentarios.forEach(c => {
+                    const div = document.createElement('div');
+                    div.className = 'comment-item';
+                    div.style.animation = "fadeIn 0.5s";
+                    div.innerHTML = `
+                        <div class="comment-avatar"><img src="https://randomuser.me/api/portraits/${c.img}" alt="${c.name}" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"></div>
+                        <div class="comment-body" style="flex: 1; background: white; padding: 15px 20px; border-radius: 0 16px 16px 16px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);">
+                            <div class="comment-name" style="font-weight: 700; font-size: 15px; color: var(--text-dark); margin-bottom: 4px;">${c.name}</div>
+                            <div class="comment-text" style="font-size: 15px; color: var(--text-gray); margin-bottom: 8px; line-height: 1.5;">${c.text}</div>
+                            <div class="comment-meta" style="font-size: 12px; color: #9CA3AF; display: flex; gap: 15px; cursor: pointer;">
+                                <span>Responder</span> <span>Curtir</span> <span>${c.time}</span>
+                            </div>
+                        </div>
+                    `;
+                    parent.insertBefore(div, btn);
+                });
+
+                btn.style.display = 'none';
+                
+            }, 800);
+        }
+    </script>
+</body>
+</html>
